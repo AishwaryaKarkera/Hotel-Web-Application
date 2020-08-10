@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Wanderlust04.Models.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+    <div class="container">
+        <h2>Discover Hotels</h2>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="'~/Uploads/" + target="_blank">
+
+                        <img src="@Url.Content("~/Uploads/" + item.ImagePath)" alt="Lights" style="width:100%">
+                        <div class="caption">
+                            <p>@Html.DisplayFor(modelItem => item.HotelName)</p>
+
+                        </div>
+                    </a>
+                    <button value="submit" class="btn btn-primary" onclick="location.href=`@Url.Action("Details", "Hotels", new { id = item.Id })`">Check Hotel</button>
+                </div>
+            </div>
+            }
+
+            
+       
+    </div>
+
+</div>
+

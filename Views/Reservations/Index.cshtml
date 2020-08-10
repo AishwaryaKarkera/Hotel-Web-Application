@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Wanderlust04.Models.Reservation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Booking Details</h2>
+
+
+<table class="table" style="margin: 50px ; width: 80%"> 
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckOut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GuestId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Room.Hotel.HotelName)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Room.Hotel.Price)
+
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Room.RoomType)
+
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuestId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.Hotel.HotelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.Hotel.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomType)
+                </td>
+
+                <td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")) {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })} |
+                    @Html.ActionLink("Details", "Details2", new { id = item.Id }) |
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")){ 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })}
+                </td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });</script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />
